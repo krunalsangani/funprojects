@@ -1,0 +1,47 @@
+Feature: In order to view my Account details,
+   As an authenticated user,
+   I should be able to access My account section
+
+@javascript
+   Scenario: Verify user is able to Subscribe to newsletter sucessfully
+             Given I am on homepage
+             And wait for the page to load
+             When I fill in "exampleInputEmail1" with "krunal.sangani@gmail.com"
+             And I press "Subscribe"
+             And wait for the page to load
+             Then I should see "Subscribed sucessfully"  
+           
+  @javascript
+  Scenario: Verify user is able to search results
+            Given I am on "/m-flights"
+            And wait for the page to load
+            When I fill in "location_from" with "New York"
+            When I fill in "origin" with "{'code':'JFK',"label":'New York'}"
+            When I fill in "location_from" with "London"
+            When I fill in "destination" with "{'code':'BHQ',"label":'London'}"
+            When I fill in "departure_date" with "2020-05-25"
+            And I press "Search"
+            And wait for the page to load
+            Then I should see "JFQ to BQH"
+
+@javascript
+   Scenario: Verify user is able to view My account section on successful login
+             Given I am on "/login"
+             When I fill in "username" with "krunal.sangani@gmail.com"
+             And I fill in "password" with "abcde12345"
+             And I press "Login"
+             And wait for the page to load
+             Then I should see "Nothing Booked Yet"
+
+  @javascript
+  Scenario: Verify user is able to search results
+            Given I am on "/m-flights"
+            And wait for the page to load
+            When I fill in "location_from" with "New York"
+            When I fill in "location_from_code" with "{'code':'JFK','label':'New York'}"
+            When I fill in "location_from" with "London"
+            When I fill in "location_to_code" with "{'code':'BHQ','label':'London'}"
+            When I fill in "departure_date" with "2020-05-25"
+            And I press "Search"
+            And wait for the page to load
+            Then I should see "JFQ to BQH"            

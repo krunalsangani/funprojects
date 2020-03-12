@@ -1,0 +1,68 @@
+Feature: In order to view my Account details,
+   As an authenticated user,
+   I should be able to access My account section
+
+
+  @javascript
+  Scenario: Verify user is able to search results for Direct Vistara flights between Pune and Delhi
+            Given I am on "/m-flights"
+            And wait for the page to load
+            When I fill hidden field "location_from_code" with "{'code':'PNQ','label':'Pune'}"
+            When I fill hidden field "location_to_code" with "{'code':'DEL','label':'DELHI'}"
+            When I fill invisible field  "FlightsDateStart" with "2020-02-29"
+            And wait for the page to load
+            And I Press Submit "btn" inside "flightmanualSearch"
+            And wait for the page to load
+            And I filter airline "Vistara"
+            And wait for the page to load
+            And I filter for stops "0"
+            And wait for the page to load
+            Then I should see "PNQ to DEL"
+
+# @javascript
+#    Scenario: Verify user is able to view My account section on successful login
+#              Given I am on "/login"
+#              When I fill in "username" with "abc@abc.com"
+#              And I fill in "password" with "abcde12345"
+#              And I press "Login"
+#              And wait for the page to load
+#              Then I should see "Nothing Booked Yet"
+
+# @javascript
+#   Scenario: Verify I am able to sign up
+#             Given I am on "/register"
+#             And I fill in "firstname" with "Hetalgiri"
+#             And I fill in "lastname" with "Goswami"
+#             And I fill in "phone" with "9999900000"
+#             And I fill in "email" with "abc@abc.com"
+#             And I fill in "password" with "abcde12345"
+#             And I fill in "confirmpassword" with "abcde12345"
+#             And I Press Submit
+#             And wait for the page to load
+#             Then I should see "Azhar"
+    
+#  @javascript
+#   Scenario: Verify user is able to search results
+#             Given I am on "/m-flights"
+#             When I fill invisible field "location_from" with "AMD"
+#             And wait for the page to load
+#             When I fill hidden field "location_from_code" with "{'code':'AMD','label':'Ahmedabad'}"
+#             When I fill invisible field "location_to" with "DEL"
+#             When I fill hidden field "location_to_code" with "{'code':'DEL','label':'New Delhi'}"
+#             When I fill in "departure_date" with "2020-05-27"
+#             #And I press "Search"
+#             And wait for the page to load
+#             Then I should see "JFQ to BQH"
+
+@javascript
+   Scenario Outline: Verify user is able to view My account section on successful login
+             Given I am on "/login"
+             When I fill in "username" with "<username>"
+             And I fill in "password" with "<password>"
+             And I press "Login"
+             And wait for the page to load
+             Then I should see "Nothing Booked Yet"
+    Examples:
+        | username | password |
+        |  krunal.sangani@gmail.com   |  abcde12345  |
+        |  abc@abc.com   |  abcde12345  |             
